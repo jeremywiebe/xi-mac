@@ -85,6 +85,8 @@ class EditViewController: NSViewController, EditViewDataSource, FindDelegate, Sc
 
     @IBOutlet weak var editViewHeight: NSLayoutConstraint!
     @IBOutlet weak var editViewWidth: NSLayoutConstraint!
+    
+    let appDelegate = NSApp.delegate as! AppDelegate
 
     lazy var findViewController: FindViewController! = {
         let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
@@ -714,6 +716,7 @@ class EditViewController: NSViewController, EditViewDataSource, FindDelegate, Sc
 
     // MARK: - Debug Methods
     @IBAction func debugSetTheme(_ sender: NSMenuItem) {
+<<<<<<< HEAD:Sources/XiEditor/EditViewController.swift
         guard sender.state != .on else { print("theme already active"); return }
         document.xiCore.setTheme(themeName: sender.title)
     }
@@ -721,7 +724,16 @@ class EditViewController: NSViewController, EditViewDataSource, FindDelegate, Sc
     @IBAction func debugSetLanguage(_ sender: NSMenuItem) {
         guard sender.state != NSControl.StateValue.on else { print("language already active"); return }
         document.xiCore.setLanguage(identifier: document.coreViewIdentifier!, languageName: sender.title)
-    }
+
+        guard sender.state != NSControl.StateValue.on else { print("theme already active"); return }
+        if sender.title == "macOS" {
+            let theme = Theme.systemTheme()
+            appDelegate.themeChanged(name: sender.title, theme: theme)
+            return
+        }
+        let req = Events.SetTheme(themeName: sender.title)
+        document.dispatcher.coreConnection.sendRpcAsync(req.method, params: req.params!)
+	}
 
     @IBAction func debugPrintSpans(_ sender: AnyObject) {
         document.sendRpcAsync("debug_print_spans", params: [])
@@ -893,6 +905,12 @@ class EditViewController: NSViewController, EditViewDataSource, FindDelegate, Sc
             .first?.title
 
         pluginsMenu.removeAllItems()
+        
+        let systemThemeMenuItem = NSMenuItem(title: "macOS", action: #selector(EditViewController.debugSetTheme(_:)), keyEquivalent: "")
+        systemThemeMenuItem.state = NSControl.StateValue(rawValue: ("macOS" == currentlyActive) ? 1 : 0)
+        
+        pluginsMenu.addItem(systemThemeMenuItem)
+        pluginsMenu.addItem(NSMenuItem.separator())
         for theme in themes {
             let item = NSMenuItem(title: theme, action: #selector(debugSetTheme), keyEquivalent: "")
             item.state = theme == currentlyActive ? .on : .off
