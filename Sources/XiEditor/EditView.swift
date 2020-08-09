@@ -14,21 +14,6 @@
 
 import Cocoa
 
-extension NSFont {
-    /// If the font is monospace, returns the width of a character, else returns 0.
-    func characterWidth() -> CGFloat {
-        if self.isFixedPitch {
-            let characters = [UniChar(0x20)]
-            var glyphs = [CGGlyph(0)]
-            if CTFontGetGlyphsForCharacters(self, characters, &glyphs, 1) {
-                let advance = CTFontGetAdvancesForGlyphs(self, .horizontal, glyphs, nil, 1)
-                return CGFloat(advance)
-            }
-        }
-        return 0
-    }
-}
-
 /// A store of properties used to determine the layout of text.
 struct TextDrawingMetrics {
     let font: NSFont
@@ -121,8 +106,8 @@ func colorToArgb(_ color: NSColor) -> UInt32 {
 }
 
 final class EditView: NSView, NSTextInputClient, TextPlaneDelegate {
-    let backingLayer: TextPlaneLayer = GLTextPlaneLayer()
-    //    let backingLayer: TextPlaneLayer = MetalTextPlaneLayer()
+//    let backingLayer: TextPlaneLayer = GLTextPlaneLayer()
+    let backingLayer: TextPlaneLayer = MetalTextPlaneLayer()
     var lastRevisionRendered = 0
     var gutterXPad: CGFloat = 8
     var gutterAnnotationWidth = 3

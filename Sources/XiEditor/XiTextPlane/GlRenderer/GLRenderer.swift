@@ -235,10 +235,10 @@ class GLRenderer: Renderer {
         textInstances[textInstanceIx + 1] = y0 + glyph.y + cachedGlyph!.yoff // 5.1859436
         textInstances[textInstanceIx + 2] = cachedGlyph!.width               // 4.5
         textInstances[textInstanceIx + 3] = cachedGlyph!.height              // 10
-        textInstances[textInstanceIx + 4] = glyph.fgColor.0                  // 50
-        textInstances[textInstanceIx + 5] = glyph.fgColor.1                  // 50
-        textInstances[textInstanceIx + 6] = glyph.fgColor.2                  // 50
-        textInstances[textInstanceIx + 7] = glyph.fgColor.3                  // 255
+        textInstances[textInstanceIx + 4] = glyph.fgColor.w                  // 50
+        textInstances[textInstanceIx + 5] = glyph.fgColor.x                 // 50
+        textInstances[textInstanceIx + 6] = glyph.fgColor.y                  // 50
+        textInstances[textInstanceIx + 7] = glyph.fgColor.z                  // 255
         textInstances[textInstanceIx + 8] = cachedGlyph!.uvCoords[0]         // 0
         textInstances[textInstanceIx + 9] = cachedGlyph!.uvCoords[1]         // 0
         textInstances[textInstanceIx + 10] = cachedGlyph!.uvCoords[2]        // 0.017578125
@@ -285,10 +285,10 @@ class GLRenderer: Renderer {
         solidInstances[solidInstanceIx + 1] = y
         solidInstances[solidInstanceIx + 2] = width
         solidInstances[solidInstanceIx + 3] = height
-        solidInstances[solidInstanceIx + 4] = fgColor.0
-        solidInstances[solidInstanceIx + 5] = fgColor.1
-        solidInstances[solidInstanceIx + 6] = fgColor.2
-        solidInstances[solidInstanceIx + 7] = fgColor.3
+        solidInstances[solidInstanceIx + 4] = fgColor.w
+        solidInstances[solidInstanceIx + 5] = fgColor.x
+        solidInstances[solidInstanceIx + 6] = fgColor.y
+        solidInstances[solidInstanceIx + 7] = fgColor.z
         solidInstanceIx += solidInstanceSize
         if solidInstanceIx == maxSolidInstances * solidInstanceSize {
             flushDraw()

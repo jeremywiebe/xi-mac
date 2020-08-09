@@ -212,7 +212,7 @@ struct GlyphInstance {
     // next 2 values are in pixels
     var x: GLfloat
     var y: GLfloat
-    var fgColor: (GLfloat, GLfloat, GLfloat, GLfloat)
+    var fgColor: vector_float4
     // Currently, flags are for fake italic, but will also have subpixel position
     var flags: UInt32
 }
@@ -260,11 +260,13 @@ enum UnderlineStyle {
 }
 
 /// Converts color value in argb format to tuple of 4 floats.
-func argbToFloats(argb: UInt32) -> (GLfloat, GLfloat, GLfloat, GLfloat) {
-    return (GLfloat((argb >> 16) & 0xff),
-            GLfloat((argb >> 8) & 0xff),
-            GLfloat(argb & 0xff),
-            GLfloat(argb >> 24))
+func argbToFloats(argb: UInt32) -> vector_float4 {
+    return vector_float4([
+        Float((argb >> 16) & 0xff),
+        Float((argb >> 8) & 0xff),
+        Float(argb & 0xff),
+        Float(argb >> 24)
+    ])
 }
 
 // TODO: make bidi-aware (signature changes to returning list of ranges)
