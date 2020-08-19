@@ -221,15 +221,15 @@ class GLRenderer: Renderer {
             }
         }
 
-        print("[drawGlyphInstance] x:\(x0), y:\(y0), \n" +
-            "  Glyph: \n" +
-            "    FG Color: \(glyph.fgColor)\n" +
-            "    X: \(glyph.x), Y: \(glyph.y)\n" +
-            "  Cached Glyph: \n" +
-            "    Offsets: \(cachedGlyph!.xoff), \(cachedGlyph!.yoff)\n" +
-            "    Size: \(cachedGlyph!.width)x\(cachedGlyph!.height)\n" +
-            "  Texture:\n" +
-            "    uvCoords: \(cachedGlyph!.uvCoords)")
+//        print("[drawGlyphInstance] x:\(x0), y:\(y0), \n" +
+//            "  Glyph: \n" +
+//            "    FG Color: \(glyph.fgColor)\n" +
+//            "    X: \(glyph.x), Y: \(glyph.y)\n" +
+//            "  Cached Glyph: \n" +
+//            "    Offsets: \(cachedGlyph!.xoff), \(cachedGlyph!.yoff)\n" +
+//            "    Size: \(cachedGlyph!.width)x\(cachedGlyph!.height)\n" +
+//            "  Texture:\n" +
+//            "    uvCoords: \(cachedGlyph!.uvCoords)")
 
         textInstances[textInstanceIx + 0] = x0 + glyph.x + cachedGlyph!.xoff // 15.5
         textInstances[textInstanceIx + 1] = y0 + glyph.y + cachedGlyph!.yoff // 5.1859436
